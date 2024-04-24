@@ -1635,6 +1635,19 @@ class CPL_DLL GDALRasterBand : public GDALMajorObject
                         OPTIONAL_OUTSIDE_GDAL(nullptr)
 #endif
                         ) CPL_WARN_UNUSED_RESULT;
+
+    // https://stackoverflow.com/questions/62238487/receive-any-iterable-container
+    template<typename BufType>
+    CPLErr RasterIO(GDALRWFlag, int, int, int, int, BufType, int, int,
+                    GDALDataType, GSpacing, GSpacing,
+                    GDALRasterIOExtraArg *psExtraArg
+#ifndef DOXYGEN_SKIP
+                        OPTIONAL_OUTSIDE_GDAL(nullptr)
+#endif
+                        ) {
+    return CE_None;
+    }
+
     CPLErr ReadBlock(int, int, void *) CPL_WARN_UNUSED_RESULT;
 
     CPLErr WriteBlock(int, int, void *) CPL_WARN_UNUSED_RESULT;
